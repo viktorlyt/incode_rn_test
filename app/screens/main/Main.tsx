@@ -19,8 +19,6 @@ import {
 import {useTypedSelector} from '../../redux/store';
 import {RenderRow} from '../../components/RenderRow';
 import {Counter} from '../../components/Counter';
-import {handleSort} from '../../utils/handleSort';
-import {Item} from '../../types/types';
 import {styles} from './styles';
 
 export default function Main(): JSX.Element {
@@ -117,14 +115,26 @@ export default function Main(): JSX.Element {
   const onSortPressed = useCallback(() => {
     const unsortedItems = query === '' ? [...items] : [...visibleItems];
 
-    handleSort(
-      sortOrder,
-      visibleItems,
-      unsortedItems,
-      setSortOrder,
-      setVisibleItems,
-    );
-  }, [items, query, sortOrder, visibleItems, setSortOrder, setVisibleItems]);
+    const newSortOrder =
+      sortOrder === 'asc' ? 'desc' : sortOrder === 'desc' ? 'sort' : 'asc';
+    setSortOrder(newSortOrder);
+
+    let sortedItems = [...visibleItems].sort((a, b) => {
+      if (sortOrder === 'asc') {
+        return a.name.localeCompare(b.name);
+      } else if (sortOrder === 'desc') {
+        return b.name.localeCompare(a.name);
+      } else {
+        return 0;
+      }
+    });
+
+    if (sortOrder === 'sort') {
+      sortedItems = [...unsortedItems];
+    }
+
+    setVisibleItems(sortedItems);
+  }, [items, query, sortOrder, visibleItems]);
 
   return (
     <View style={styles.container}>

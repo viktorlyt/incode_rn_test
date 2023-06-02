@@ -1,9 +1,9 @@
-export type RootStackParamList = {
+type RootStackParamList = {
   Main: undefined;
   Details: {item: Item};
 };
 
-export interface Item {
+interface Item {
   name: string;
   height: number;
   mass: number;

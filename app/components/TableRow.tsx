@@ -11,7 +11,6 @@ import {
   incrementOtherFans,
 } from '../redux/countersSlice';
 import {toggleItemSelection} from '../redux/itemsSlice';
-import {Item} from '../types/types';
 
 export default function TableRow({item}: {item: Item}) {
   const dispatch = useDispatch();

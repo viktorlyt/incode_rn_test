@@ -1,5 +1,4 @@
 import {takeLatest, call, put} from 'redux-saga/effects';
-import {Item} from '../types/types';
 import {
   fetchItemsRequest,
   fetchItemsSuccess,

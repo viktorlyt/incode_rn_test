@@ -2,7 +2,6 @@ import React from 'react';
 import {View, Text, Pressable} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Item, RootStackParamList} from '../../types/types';
 import {styles} from './styles';
 
 type DetailsProps = {
