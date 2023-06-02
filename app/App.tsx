@@ -2,9 +2,9 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import store from './app/redux/store';
-import Main from './app/screens/main/Main';
-import Details from './app/screens/details/Details';
+import store from './redux/store';
+import Main from './screens/main/Main';
+import Details from './screens/details/Details';
 
 const Stack = createStackNavigator();
 
