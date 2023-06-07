@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import {
-  ScrollView,
   Button,
   Text,
   TextInput,
@@ -138,59 +137,57 @@ export default function Main(): JSX.Element {
   }, [items, query, sortOrder, visibleItems]);
 
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.text_header}>Fans</Text>
-          <Button title="CLEAR FANS" onPress={onClearFansPressed} />
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.text_header}>Fans</Text>
+        <Button title="CLEAR FANS" onPress={onClearFansPressed} />
+      </View>
+      <View style={styles.counters}>
+        <Counter text="Female Fans" />
+        <Counter text="Male Fans" />
+        <Counter text="Others" />
+      </View>
+      <View style={styles.counterBox}>
+        <View style={styles.searchBox}>
+          <IconE name="search" size={30} color="#000" />
+          <TextInput
+            placeholder="Search"
+            id="search"
+            value={query}
+            onChangeText={handleQuery}
+          />
         </View>
-        <View style={styles.counters}>
-          <Counter text="Female Fans" />
-          <Counter text="Male Fans" />
-          <Counter text="Others" />
-        </View>
-        <View style={styles.counterBox}>
-          <View style={styles.searchBox}>
-            <IconE name="search" size={30} color="#000" />
-            <TextInput
-              placeholder="Search"
-              id="search"
-              value={query}
-              onChangeText={handleQuery}
-            />
-          </View>
-          <View style={styles.table}>
-            <View style={styles.tableHeader}>
-              <Icon name="heart" size={16} color="#000" style={styles.icon} />
-              <Text style={styles.cellName}>Name</Text>
-              <TouchableOpacity onPress={onSortPressed}>
-                <Icon
-                  name={
-                    sortOrder === 'asc'
-                      ? 'sort-asc'
-                      : sortOrder === 'desc'
-                      ? 'sort-desc'
-                      : 'sort'
-                  }
-                  size={16}
-                  color="#000"
-                  style={styles.icon}
-                />
-              </TouchableOpacity>
-              <Text style={styles.cell}>Birth Year</Text>
-              <Text style={styles.cell}>Gender</Text>
-            </View>
-            <View>
-              <FlatList
-                data={visibleItems}
-                keyExtractor={keyExtractor}
-                renderItem={({item}) => <RenderRow item={item} />}
+        <View style={styles.table}>
+          <View style={styles.tableHeader}>
+            <Icon name="heart" size={16} color="#000" style={styles.icon} />
+            <Text style={styles.cellName}>Name</Text>
+            <TouchableOpacity onPress={onSortPressed}>
+              <Icon
+                name={
+                  sortOrder === 'asc'
+                    ? 'sort-asc'
+                    : sortOrder === 'desc'
+                    ? 'sort-desc'
+                    : 'sort'
+                }
+                size={16}
+                color="#000"
+                style={styles.icon}
               />
-              {renderPagination()}
-            </View>
+            </TouchableOpacity>
+            <Text style={styles.cell}>Birth Year</Text>
+            <Text style={styles.cell}>Gender</Text>
+          </View>
+          <View>
+            <FlatList
+              data={visibleItems}
+              keyExtractor={keyExtractor}
+              renderItem={({item}) => <RenderRow item={item} />}
+            />
+            {renderPagination()}
           </View>
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
